@@ -1,0 +1,14 @@
+{
+  "name": "diplomaapplications",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "react-app",
+    "vue-app",
+    "svelte-app",
+    "shared"
+  ],
+  "description": "",
+  "type": "module",
+  "main": "index.js"
+}
