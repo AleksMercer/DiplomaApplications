@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@shared/*": ["./shared/*"]
-    }
+    },
+    "types": ["vite/client"]
   }
 }

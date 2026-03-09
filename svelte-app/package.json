@@ -4,10 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --strictPort --port=5175",
     "build": "vite build",
-    "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
+    "preview": "vite preview --strictPort --port=5175"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^6.2.1",
