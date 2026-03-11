@@ -43,7 +43,6 @@
     }, 300)
   }
 
-  // id для связи label ↔ control
   const IDS = {
     search: 'filter-search',
     category: 'filter-category',

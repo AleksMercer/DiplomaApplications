@@ -26,7 +26,6 @@ export default function FormView() {
   const countries = mockCountries;
 
   useEffect(() => {
-    // reset city if country cleared
     if (!form.country) {
       setAvailableCities([]);
       setForm((prev) => ({ ...prev, city: "" }));

@@ -23,10 +23,9 @@ export const sortProducts = (
   const arr = [...products];
   if (sortBy === "price-asc") return arr.sort((a, b) => a.price - b.price);
   if (sortBy === "price-desc") return arr.sort((a, b) => b.price - a.price);
-  return arr; // при "none" тоже возвращаем копию для иммутабельности
+  return arr;
 };
 
-// тип для дебаунса с возможностью управлять из тестов
 type Debounced<T extends (...args: any[]) => void> = ((
   ...args: Parameters<T>
 ) => void) & {

@@ -44,7 +44,6 @@ export default function FilterView() {
     setIsLoading(true);
     setTimeout(() => {
       const newProducts = Array.from({ length: 20 }, generateProduct);
-      // добавляем в конец списка, чтобы не провоцировать CLS
       setAllProducts((prev) => [...prev, ...newProducts]);
       setIsLoading(false);
     }, 300);

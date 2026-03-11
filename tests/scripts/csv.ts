@@ -66,7 +66,6 @@ function buildEntries(page: string, m: any): Entry[] {
     ];
   }
 
-  // fallback — пишем всё, что есть
   return [
     { label: "LCP ms", value: r(m?.lcp) },
     { label: "INP ms", value: r(m?.inp) },

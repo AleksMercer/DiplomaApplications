@@ -1,4 +1,3 @@
-// shared/metrics.ts
 import { onCLS, onFCP, onINP, onLCP, type Metric } from "web-vitals";
 
 type LongTaskInfo = { startTime: number; duration: number };
@@ -122,7 +121,6 @@ export function initMetrics() {
     if (state.finalized) return data;
     state.finalized = true;
 
-    // Дадим кадр на доставку последних энтри
     await new Promise((r) => requestAnimationFrame(() => r(null)));
 
     const fcpStart = state.fcpTime || 0;

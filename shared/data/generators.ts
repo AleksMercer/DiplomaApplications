@@ -1,12 +1,9 @@
 import { faker } from "@faker-js/faker";
 import type { Product, Country, City } from "../types";
 
-// Фиксируем seed для детерминированных данных
-// Можно переопределить через Vite env: VITE_DATA_SEED
 const SEED = Number((import.meta as any)?.env?.VITE_DATA_SEED ?? 1);
 faker.seed(SEED);
 
-// Фиксированный набор категорий — стабилизирует фильтрацию/сортировку
 export const CATEGORIES: string[] = [
   "Электроника",
   "Одежда",
@@ -16,7 +13,6 @@ export const CATEGORIES: string[] = [
   "Красота",
 ];
 
-// Локальный SVG-плейсхолдер (без внешних запросов)
 function svgPlaceholder(text: string, width = 200, height = 200): string {
   const safeText = (text || "?").slice(0, 2).toUpperCase();
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">
