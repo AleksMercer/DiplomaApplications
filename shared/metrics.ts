@@ -11,6 +11,7 @@ export type MetricsData = {
   longTasks: { count: number; sum: number };
   memory: { jsHeapUsed: number | null };
   jsWeight?: number | null;
+  mtbr: number | null;
   ready: boolean;
   page: string | null;
 };
@@ -40,6 +41,7 @@ export function initMetrics() {
     longTasks: { count: 0, sum: 0 },
     memory: { jsHeapUsed: null },
     jsWeight: null,
+    mtbr: null,
     ready: false,
     page: null,
   };
@@ -80,9 +82,8 @@ export function initMetrics() {
     const po = new PerformanceObserver((list) => {
       for (const e of list.getEntries()) {
         const duration = e.duration || 0;
-        if (duration > 0) {
+        if (duration > 0)
           state.longTasks.push({ startTime: e.startTime, duration });
-        }
       }
     });
     po.observe({ type: "longtask", buffered: true });
@@ -137,10 +138,18 @@ export function initMetrics() {
 
     data.longTasks = { count: windowTasks.length, sum: Math.round(longSum) };
     data.tbt = Math.round(tbt);
-    data.memory.jsHeapUsed = await computeMemory();
 
     if (data.jsWeight == null) {
       data.jsWeight = computeJsWeight();
+    }
+
+    if (fcpStart > 0) {
+      const endNow = performance.now();
+      const duration = endNow - fcpStart;
+      data.mtbr =
+        duration > 0 ? Math.round((longSum / duration) * 10000) / 10000 : null;
+    } else {
+      data.mtbr = null;
     }
 
     data.ready = true;
@@ -156,9 +165,7 @@ export function initMetrics() {
   }
 
   document.addEventListener("visibilitychange", () => {
-    if (document.visibilityState === "hidden") {
-      finalize();
-    }
+    if (document.visibilityState === "hidden") finalize();
   });
 
   window.__metrics = {

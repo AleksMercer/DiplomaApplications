@@ -180,7 +180,7 @@
     "test:react": "npx playwright test --project=react-chromium",
     "test:svelte": "npx playwright test --project=svelte-chromium",
     "test:vanilla": "npx playwright test --project=vanilla-chromium",
-    "test:repeat": "npx playwright test --repeat-each=2"
+    "test:repeat": "npx playwright test --repeat-each=50"
   },
   "repository": {
     "type": "git",

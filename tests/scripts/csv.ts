@@ -26,7 +26,7 @@ const r = (v: any) => (isNum(v) ? Math.round(v) : null);
 type Entry = { label: string; value: number | null };
 
 function buildEntries(page: string, m: any): Entry[] {
-  const heap = m?.memory?.jsHeapUsed ?? null;
+  const mtbr = m?.mtbr ?? null;
   const lcnt = m?.longTasks?.count ?? null;
   const lsum = m?.longTasks?.sum ?? null;
 
@@ -34,7 +34,6 @@ function buildEntries(page: string, m: any): Entry[] {
     return [
       { label: "LCP ms", value: r(m?.lcp) },
       { label: "FCP ms", value: r(m?.fcp) },
-      { label: "JSHeapUsed B", value: isNum(heap) ? heap : null },
       { label: "JSWeight B", value: isNum(m?.jsWeight) ? m.jsWeight : null },
     ];
   }
@@ -47,7 +46,10 @@ function buildEntries(page: string, m: any): Entry[] {
       { label: "TBT ms", value: r(m?.tbt) },
       { label: "LongTasks sum ms", value: r(lsum) },
       { label: "LongTasks count", value: isNum(lcnt) ? lcnt : null },
-      { label: "JSHeapUsed B", value: isNum(heap) ? heap : null },
+      {
+        label: "MTBR",
+        value: isNum(mtbr) ? Math.round(mtbr * 10000) / 10000 : null,
+      },
       { label: "JSWeight B", value: isNum(m?.jsWeight) ? m.jsWeight : null },
     ];
   }
@@ -61,8 +63,6 @@ function buildEntries(page: string, m: any): Entry[] {
       { label: "TBT ms", value: r(m?.tbt) },
       { label: "LongTasks sum ms", value: r(lsum) },
       { label: "LongTasks count", value: isNum(lcnt) ? lcnt : null },
-      { label: "JSHeapUsed B", value: isNum(heap) ? heap : null },
-      { label: "JSWeight B", value: isNum(m?.jsWeight) ? m.jsWeight : null },
     ];
   }
 
@@ -74,7 +74,6 @@ function buildEntries(page: string, m: any): Entry[] {
     { label: "TBT ms", value: r(m?.tbt) },
     { label: "LongTasks sum ms", value: r(lsum) },
     { label: "LongTasks count", value: isNum(lcnt) ? lcnt : null },
-    { label: "JSHeapUsed B", value: isNum(heap) ? heap : null },
     { label: "JSWeight B", value: isNum(m?.jsWeight) ? m.jsWeight : null },
   ];
 }
@@ -83,7 +82,6 @@ export async function appendToCsv(testInfo: TestInfo, metrics: any) {
   const fw = frameworkShort(testInfo.project.name);
   const page = normalizePage(metrics?.page ?? testInfo.title);
   const entries = buildEntries(page, metrics).filter((e) => e.value !== null);
-
   if (entries.length === 0) return;
 
   const dir = path.resolve(process.cwd(), "metrics");
