@@ -1,0 +1,21 @@
+services:
+  benchmark:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: diploma-benchmark
+    environment:
+      - CI=1
+      - TZ=Europe/Moscow
+    volumes:
+      - ./metrics:/app/metrics
+    # Ограничение ресурсов для эмуляции "среднего" устройства
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4G
+    ipc: host
+    init: true
+    stdin_open: true
+    tty: true
