@@ -15,7 +15,7 @@
   cd react-app && npm run dev
 - Svelte (http://localhost:5175):
   cd svelte-app && npm run dev
-- Svelte (http://localhost:5176):
+- Vanilla (http://localhost:5176):
   cd vanilla-app && npm run dev
 
 ## Запуск автотестов (прод-сборка + preview поднимется автоматически)
@@ -37,7 +37,7 @@
   - "Vue: Test Load завершен"
   - "Vue: Test Filter завершен"
   - "Vue: Test Form завершен"
-    (Аналогично для React/Svelte)
+    (Аналогично для React/Svelte/Vanilla)
 
 ## Где лежат данные для Excel
 
@@ -66,12 +66,13 @@
     "dev:vue": "cd vue-app && npm run dev",
     "dev:react": "cd react-app && npm run dev",
     "dev:svelte": "cd svelte-app && npm run dev",
+    "dev:vanilla": "cd vanilla-app && npm run dev",
     "test:all": "npx playwright test",
     "test:vue": "npx playwright test --project=vue-chromium",
     "test:react": "npx playwright test --project=react-chromium",
     "test:svelte": "npx playwright test --project=svelte-chromium",
     "test:vanilla": "npx playwright test --project=vanilla-chromium",
-    "test:repeat": "npx playwright test --repeat-each=10"
+    "test:repeat": "npx playwright test --repeat-each=50"
   }
 }
 ```
